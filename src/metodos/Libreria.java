@@ -9,6 +9,8 @@ import api.PilaTDA;
 import implementaciones.ColaPI;
 import implementaciones.ColaPU;
 import implementaciones.ColaPrioridadAO;
+import implementaciones.ColaPrioridadD;
+import implementaciones.ConjuntoLD;
 import implementaciones.ConjuntoTA;
 import implementaciones.DicMultipleA;
 import implementaciones.DicSimpleA;
@@ -559,4 +561,156 @@ public class Libreria {
 			claves.Sacar(claveElegida);
 		}
 	}
+	
+	//PRACTICA 1
+	
+	//EJERCICIO 6 A
+	
+	public static ColaPrioridadTDA combinarColasConPrioridad(ColaPrioridadTDA unaCola, ColaPrioridadTDA otraCola) {
+		
+		ColaPrioridadTDA unaColaConPrioridad = new ColaPrioridadAO();
+		unaColaConPrioridad.InicializarCola();
+		
+		ColaPrioridadTDA otraColaConPrioridad = new ColaPrioridadAO();
+		otraColaConPrioridad.InicializarCola();
+		
+		Libreria.copiar(unaCola, unaColaConPrioridad);
+		Libreria.copiar(otraCola, otraColaConPrioridad);
+		
+		
+		while(!otraColaConPrioridad.ColaVacia()) {
+			unaColaConPrioridad.AcolarPrioridad(otraColaConPrioridad.Primero(), otraColaConPrioridad.Prioridad());
+			otraColaConPrioridad.Desacolar();
+		}
+		
+		return unaColaConPrioridad;
+		
+	}
+	
+	public static Boolean lasDosColasSonIdenticas(ColaPrioridadTDA unaCola, ColaPrioridadTDA otraCola) {
+		
+		ColaPrioridadTDA unaColaConPrioridad = new ColaPrioridadAO();
+		unaColaConPrioridad.InicializarCola();
+		
+		ColaPrioridadTDA otraColaConPrioridad = new ColaPrioridadAO();
+		otraColaConPrioridad.InicializarCola();
+		
+		Libreria.copiar(unaCola, unaColaConPrioridad);
+		Libreria.copiar(otraCola, otraColaConPrioridad);
+		
+		while(!unaColaConPrioridad.ColaVacia() 
+				&& !otraColaConPrioridad.ColaVacia() 
+				&& otraColaConPrioridad.Primero() == unaColaConPrioridad.Primero() 
+				&& otraColaConPrioridad.Primero() == unaColaConPrioridad.Primero()) {
+			
+			unaColaConPrioridad.Desacolar();
+			otraColaConPrioridad.Desacolar();
+			
+		} 
+		
+		return unaColaConPrioridad.ColaVacia() && otraColaConPrioridad.ColaVacia();
+	}
+	
+	//PRACTICA 3
+	
+	//1B
+	
+	public static void eliminarElementosRepetidosDe(PilaTDA unaPila) {
+		
+		PilaTDA unaCopiaDeLaPila = new PilaTF();
+		unaCopiaDeLaPila.InicializarPila();
+		pasar(unaPila, unaCopiaDeLaPila);
+		
+		ConjuntoTDA unConjuntoConLosElementosDeLaPIla = new ConjuntoLD();
+		unConjuntoConLosElementosDeLaPIla.InicializarConjunto();
+		
+		unaPila.InicializarPila();
+		
+		while(!unaCopiaDeLaPila.PilaVacia()) {
+			
+			if(!unConjuntoConLosElementosDeLaPIla.Pertenece(unaCopiaDeLaPila.Tope())) {
+				unaPila.Apilar(unaCopiaDeLaPila.Tope());
+				unConjuntoConLosElementosDeLaPIla.Agregar(unaCopiaDeLaPila.Tope());
+			}
+			
+			unaCopiaDeLaPila.Desapilar();
+			
+		}
+		
+		
+	}
+	
+	public static PilaTDA generarConjuntoDeRepetidosDe(PilaTDA unaPila) {
+		
+		PilaTDA unaCopiaDeLaPila = new PilaTF();
+		unaCopiaDeLaPila.InicializarPila();
+		pasar(unaPila, unaCopiaDeLaPila);
+		
+		ConjuntoTDA unConjuntoConLosElementosDeLaPIla = new ConjuntoLD();
+		unConjuntoConLosElementosDeLaPIla.InicializarConjunto();
+		
+		ConjuntoTDA unConjuntoDeRepetidos = new ConjuntoLD();
+		unConjuntoDeRepetidos.InicializarConjunto();
+
+		PilaTDA pilaDeRepetidos = new PilaTF();
+		pilaDeRepetidos.InicializarPila();
+		
+		
+		while(!unaCopiaDeLaPila.PilaVacia()) {
+			
+			if(unConjuntoConLosElementosDeLaPIla.Pertenece(unaCopiaDeLaPila.Tope()) && !unConjuntoDeRepetidos.Pertenece(unaCopiaDeLaPila.Tope())) {
+				pilaDeRepetidos.Apilar(unaCopiaDeLaPila.Tope());
+				unConjuntoDeRepetidos.Agregar(unaCopiaDeLaPila.Tope());
+			}
+			
+			unConjuntoConLosElementosDeLaPIla.Agregar(unaCopiaDeLaPila.Tope());
+			
+			unaCopiaDeLaPila.Desapilar();
+			
+		}
+		
+		return pilaDeRepetidos;
+		
+	}
+	
+	public static DiccionarioMultipleTDA generarDiccionarioMultiple(ColaPrioridadTDA unaCola) {
+		
+		DiccionarioMultipleTDA diccionario = new DicMultipleA();
+		
+		diccionario.InicializarDiccionario();
+		
+		ColaPrioridadTDA otraCola = new ColaPrioridadD();
+		otraCola.InicializarCola();
+		
+		copiar(unaCola, otraCola);
+		
+		while(!otraCola.ColaVacia()) {
+			diccionario.Agregar(otraCola.Primero(), otraCola.Prioridad());
+			otraCola.Desacolar();
+		}
+		
+		return diccionario;
+		
+	}
+	
+	public static DiccionarioMultipleTDA generarDiccionarioMultipleAPartirDeSignificados(DiccionarioSimpleTDA unDiccionario) {
+		
+		DiccionarioMultipleTDA diccionario = new DicMultipleA();
+		
+		diccionario.InicializarDiccionario();
+		
+		ConjuntoTDA claves = unDiccionario.Claves();
+		
+		while(!claves.ConjuntoVacio()) {
+			int claveElegida = claves.Elegir();
+			diccionario.Agregar(unDiccionario.Recuperar(claveElegida), claveElegida);
+
+			claves.Sacar(claveElegida);
+			
+		}
+		
+		return diccionario;
+		
+	}
+	
 }

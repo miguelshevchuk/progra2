@@ -67,16 +67,23 @@ public class Test {
 		this.diccionarioMultipleDestino = new DicMultipleA();
 		Libreria.llenar(this.diccionarioMultiple);
 		this.diccionarioMultipleDestino.InicializarDiccionario();
+		
 	}
 
 	public void ejecutar(){
 		
-		this.ejercicioPilas();
-		this.ejercicioColas();
-		this.ejercicioColasConPrioridad();
-		this.ejercicioConjuntos();
-		this.ejercicioDiccionarioSimple();
-		this.ejercicioDiccionarioMultiple();
+		Practica1 practica1 = new Practica1();
+		practica1.ejecutar();
+		
+		Practica3 practica3 = new Practica3();
+		practica3.ejecutar();
+		
+//		this.ejercicioPilas();
+//		this.ejercicioColas();
+//		this.ejercicioColasConPrioridad();
+//		this.ejercicioConjuntos();
+//		this.ejercicioDiccionarioSimple();
+//		this.ejercicioDiccionarioMultiple();
 		
 	}
 	
@@ -272,7 +279,5 @@ public class Test {
 		System.out.println("------------FIN EJERCICIO DICCIONARIO MULTIPLE-------------");
 		System.out.println("");
 	}
-	
-	
 	
 }
