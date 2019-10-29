@@ -47,8 +47,8 @@ public class ABB implements ABBTDA {
 		}else {
 			if(raiz.info > x) {
 				raiz.HijoIzq.AgregarElem(x);
-			}else {
-			raiz.HijoDer.AgregarElem(x);
+			}else if (raiz.info < x){
+				raiz.HijoDer.AgregarElem(x);
 			}
 		}
 	}
