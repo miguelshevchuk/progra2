@@ -1,9 +1,7 @@
 package metodos;
 
 import api.ABBTDA;
-import api.ColaTDA;
 import implementaciones.ABB;
-import implementaciones.ColaPU;
 
 public class LibArboles {
 
@@ -107,8 +105,38 @@ public class LibArboles {
 	}
 	
 	public static int cantidadDeElementosDe(ABBTDA unArbol) {
+		int cantidad = 0;
+		if(!unArbol.ArbolVacio()){
+			cantidad = 1 + cantidadDeElementosDe(unArbol.HijoDer()) + cantidadDeElementosDe(unArbol.HijoIzq());
+		}
 		
-		return 0;
+		return cantidad;
+	}
+
+	public static int sumatoriaDeElementosDe(ABBTDA unArbol) {
+		int cantidad = 0;
+		if(!unArbol.ArbolVacio()){
+			cantidad = unArbol.Raiz() + sumatoriaDeElementosDe(unArbol.HijoDer()) + sumatoriaDeElementosDe(unArbol.HijoIzq());
+		}
+		
+		return cantidad;
+	}
+
+	public static int cantidadDeHojasDe(ABBTDA unArbol) {
+		int retorno = 0;
+		if(!unArbol.ArbolVacio()){
+			if(esHoja(unArbol)){
+				retorno = 1;
+			}else{
+				retorno = cantidadDeHojasDe(unArbol.HijoDer()) + cantidadDeHojasDe(unArbol.HijoIzq());
+			}
+		}
+		
+		return retorno;
+	}
+	
+	private static Boolean esHoja(ABBTDA unArbol){
+		return unArbol.HijoDer().ArbolVacio() && unArbol.HijoIzq().ArbolVacio();
 	}
 	
 }

@@ -35,7 +35,9 @@ public class ArbolesTest {
 		this.testMetodoProfundidad();
 
 		this.testMetodoAltura();
-//		this.testMetodoElMenor();
+		this.testMetodoCantidadDeElementos();
+		this.testMetodoSumatoria();
+		this.testMetodoDeCantidadDeHojas();
 	}
 	
 	private void testMetodoProfundidad() {
@@ -59,12 +61,28 @@ public class ArbolesTest {
 		System.out.println("La altura del arbol tiene que ser 4: "+LibArboles.alturaDe(this.arbol));
 	}
 	
-//	private void testMetodoElMenor() {
-//		System.out.println("");
-//		System.out.println("------------------- METODO PARA CALCULAR EL MENOR -------------------");
-//		System.out.println("");
-//		
-//		System.out.println("El menor elemento es el: "+LibArboles.elMenorElementoDe(this.arbol));
-//	}
+	private void testMetodoCantidadDeElementos() {
+		System.out.println("");
+		System.out.println("------------------- METODO PARA CALCULAR CANTIDAD DE ELEMENTOS -------------------");
+		System.out.println("");
+		
+		System.out.println("La cantidad de elementos del arbol deberia ser 16: "+LibArboles.cantidadDeElementosDe(this.arbol));
+	}
+	
+	private void testMetodoSumatoria() {
+		System.out.println("");
+		System.out.println("------------------- METODO PARA CALCULAR LA SUMATORIA -------------------");
+		System.out.println("");
+		
+		System.out.println("La sumatoria del arbol es : "+LibArboles.sumatoriaDeElementosDe(this.arbol));
+	}
+	
+	private void testMetodoDeCantidadDeHojas() {
+		System.out.println("");
+		System.out.println("------------------- METODO PARA CALCULAR LA CANTIDAD DE HOJAS -------------------");
+		System.out.println("");
+		
+		System.out.println("La cantidad de hojas del arbol es : "+LibArboles.cantidadDeHojasDe(this.arbol));
+	}
 	
 }
