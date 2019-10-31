@@ -4,9 +4,12 @@ public class Principal {
 
 	public static void main(String[] args) {
 
-		Test test = new Test();
+//		Test test = new Test();
+//		
+//		test.ejecutar();
 		
-		test.ejecutar();
+		ArbolesTest testArboles = new ArbolesTest();
+		testArboles.ejecutar();
 
 	}
 
